@@ -1,0 +1,38 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "DS2023 Final_Project"
+  author: "Ethan, Vinith, Alieen"
+  #favicon:
+  description: "This is a final project for DS2023"
+  keyword: data science, communicating, storytelling
+  #url:
+  #sidebar:
+    #logo:
+  search: true
+  repo-url: https://github.com/JuneWayne/DS2023-Final-Project
+  repo-branch: master
+  #image:
+
+
+
+  chapters:
+    - index.qmd
+    - datacleaning.qmd
+    - eda.qmd
+    - dataviz.qmd
+    - datadictionary.qmd
+
+format:
+  html:
+    theme:
+      light: minty
+    code-fode: false
+    backgroundcolor: '#FFFFFF'
+
+
+
+
+
