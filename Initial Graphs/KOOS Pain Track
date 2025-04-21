@@ -1,0 +1,49 @@
+#First we need to map the tss_dashboard features to a specifc number (us attempting to make it into a chronological timeline, since it wasn't ordered before )
+
+tss_mapping = {
+    "Preoperative": 0,
+    "3 to 4 months": 1,
+    "5 to 7 months": 2,
+    "8 to 12 months": 3,
+    "13 to 24 months": 4,
+}
+
+# Need to make a new column that connects the order of the tss_maping and the tss_dashboard
+df['time_ordered'] = df['tss_dashboard'].map(tss_mapping)
+
+# Set the x-axis labels in correct order
+labels = [t for t, a in sorted(tss_mapping.items(), key=lambda x: x[1])]
+
+
+# MAKING THE GRAPH
+
+
+
+# Plotting figure dimensions
+plt.figure(figsize=(14, 6))
+# Ploting the patients as gray- but interested in a target patient as red (we choose a random record_id number)
+# This runs a conditional that makes all other record_id as gray ( trying to focus on "benchmark")
+for pat, group in df.groupby('record_id'):
+    if pat != 101: # we choose a random record_id number as a benchmark
+        plt.plot(group['time_ordered'], group['koos_pain'], color='gray', alpha=0.2)
+
+#  NOW WE Plot the target ( benchmark) record_id ( "patient")
+ben = df[df['record_id'] == 101] # this makes a new column that has information on our benchmark patient
+plt.plot(ben['time_ordered'], ben['koos_pain'], color='red', linewidth=3, label='BENCHMARK')
+
+
+
+
+# Format the x-axis with correct labels
+plt.xticks(ticks=range(len(labels)), labels=labels, rotation=0)
+plt.xlabel('Time Since Surgery')
+plt.ylabel('KOOS Pain Score')
+plt.grid(False)
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['bottom'].set_visible(False)
+plt.gca().spines['left'].set_visible(False)
+plt.title('KOOS Pain Recovery Trajectories')
+plt.legend()
+plt.tight_layout()
+plt.show()
