@@ -54,7 +54,7 @@ plt.savefig('age_sex.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.show()
 ```
 
-![graft type distribution by sex](age_sex.png.png)
+![graft type distribution by sex](age_sex.png)
 
 **Along the way, we discovered that tss stands for 'time since surgery' a relatively useful variable for us since we are aiming to visualize the change in recovery rates or other variables over time.**
 
