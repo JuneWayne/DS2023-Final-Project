@@ -1,7 +1,28 @@
 ---
-title: "Untitled"
+title: "Data Dictionary"
 format: html
 ---
 
-![Data Dictionary](Datadictionary.pdf)
+| Variable             | Description                                                                                     |
+|----------------------|-------------------------------------------------------------------------------------------------|
+| `record_id`          | Random record id assigned to a patient (unique to each patient)                                 |
+| `sex_dashboard`      | Sex of the patient (Male, Female, Not reported)                                                 |
+| `koos_pain`          | Patient reported pain level via survey questions (scale = 0–100)                                |
+| `koos_sx`            | Patient reported symptoms via survey questions (scale = 0–100)                                  |
+| `koos_adl`           | Difficulties with activities of daily living (scale = 0–100)                                    |
+| `koos_sport`         | Difficulties related to sport and recreation (scale = 0–100)                                    |
+| `koos_qol`           | Knee-related quality of life (scale = 0–100)                                                    |
+| `tss_dashboard`      | Grouped months since surgery (e.g., perioperative, 3–4 months...)                                |
+| `acl_flex_isok_60`   | Torque of isokinetic flexion at 60°/s: peak torque recorded (Nm/kg)                             |
+| `acl_ext_isok_60`    | Torque of isokinetic extension at 60°/s: peak torque recorded (Nm/kg)                           |
+| `acl_ext_mvic_60`    | Knee Extension MVIC at 60°: peak torque recorded (Nm/kg)                                        |
+| `lsi_ext_mvic_60`    | Limb symmetry index of knee extension torque (Nm/kg)                                            |
+| `lsi_flex_isok_60`   | Limb symmetry index of isokinetic flexion torque (Nm/kg)                                        |
+| `lsi_ext_iok_60`     | Limb symmetry index of isokinetic extension torque (Nm/kg)                                      |
+| `pedi_ikdc`          | Knee function score for patients aged 10–18 (scale = 0–100)                                     |
+| `ikdc`               | Adult knee function score using IKDC form (scale = 0–100)                                       |
+| `acl_rsi`            | Return to Sport after Injury Scale score (scale = 0–100)                                        |
+| `ch_lsi`             | Crossover Hop limb symmetry index (percentage)                                                  |
+| `th_lsi`             | Triple Hop limb symmetry index (percentage)                                                     |
+| `sh_lsi`             | Single Hop limb symmetry index (percentage)                                                     |
 
