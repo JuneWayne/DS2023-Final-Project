@@ -60,10 +60,10 @@ plt.axvspan(2, 3, color='green', alpha=0.1, label='Late Recovery Stage')
 
 # Let's Highlight Patient 101
 ben = df_sampled[df_sampled['record_id'] == 101].sort_values('time_ordered') #this makes a new column that has information on our benchmark patient
-plt.plot(ben['time_ordered'], ben['koos_pain'], color='red', linewidth=2.5) # red to show importance
+plt.plot(ben['time_ordered'], ben['koos_pain'], color='orange', linewidth=2.5) # red to show importance
 # Annotate each point on Patient 101's line with the KOOS Pain score value
 for x, y in zip(ben['time_ordered'], ben['koos_pain']):
-    plt.text(x, y + 1, f'{y:.1f}', color='red', fontsize=9, ha='left')
+    plt.text(x, y + 1, f'{y:.1f}', color='orange', fontsize=9, ha='left')
 
 
 # styling
@@ -71,7 +71,7 @@ plt.xticks(ticks=range(len(labels)), labels=labels)
 plt.xlabel('Time Since Surgery',fontsize=12)
 plt.ylabel('KOOS Pain Score', fontsize=12)
 plt.text(-0.2, 105, 'Post-ACLR KOOS Pain Scores: Where Does',fontsize=20, fontweight='bold', ha='left')
-plt.text(1.613, 105, 'Patient 101', fontsize=20, fontweight='bold', ha='left', color='#FF0000')
+plt.text(1.613, 105, 'Patient 101', fontsize=20, fontweight='bold', ha='left', color='orange')
 plt.text(2.12, 105, 'Fit in the Recovery Spectrum?', fontsize=20, fontweight='bold', ha='left')
 plt.grid(False)
 plt.gca().spines['top'].set_visible(False)
