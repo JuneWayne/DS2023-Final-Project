@@ -6,7 +6,7 @@ book:
   title: "DS2023 Final_Project"
   author: "Ethan, Vinith, Alieen"
   favicon: logo.png
-  description: "This is a final project for DS2023"
+  description: "Patient 101's Recovery Journey: Data Driven Insights into Healthcare"
   keyword: data science, communicating, storytelling, data visualization
   url: https://junewayne.github.io/DS2023-Final-Project/ 
   sidebar:
