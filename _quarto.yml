@@ -5,16 +5,16 @@ project:
 book:
   title: "DS2023 Final_Project"
   author: "Ethan, Vinith, Alieen"
-  #favicon:
+  favicon: logo.png
   description: "This is a final project for DS2023"
-  keyword: data science, communicating, storytelling
-  #url:
-  #sidebar:
-    #logo:
-  search: true
+  keyword: data science, communicating, storytelling, data visualization
+  url: https://junewayne.github.io/DS2023-Final-Project/ 
+  sidebar:
+    logo: logo.png
+    search: true
   repo-url: https://github.com/JuneWayne/DS2023-Final-Project
   repo-branch: master
-  #image:
+  image: logo.png
 
 
 
