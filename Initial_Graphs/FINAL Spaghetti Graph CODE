@@ -1,0 +1,89 @@
+#Importing Necessary Packages
+import matplotlib.pyplot as plt 
+import pandas as pd
+import numpy as np
+import random # this is used to select random patients to sample/project on our visualization since we are limiting the number of paitents (lines), being shown on the page.
+
+#SETTING THE SEED- for reproducibility 
+random.seed(42)
+
+# Let's Remove "Preoperative" stage ( only has a few lines so it's not worth out puting)
+df_filtered = df[df['tss_dashboard'] != 'Preoperative']
+
+# Map timepoints (we do this because the default was unordered and didn't have a logical flow)
+tss_mapping = {
+    "3 to 4 months": 0,
+    "5 to 7 months": 1,
+    "8 to 12 months": 2,
+    "13 to 24 months": 3,
+}
+
+df_filtered['time_ordered'] = df_filtered['tss_dashboard'].map(tss_mapping)
+# Setting the x-axis labels in correct order
+labels = [t for t, a in sorted(tss_mapping.items(), key=lambda x: x[1])]
+
+# Keeping patients with at least 3 timepoints, includeing  patient 101 ( which is our selected patient of focus)
+#Consulted with CHATGTP for a little help refining and structreing this part
+
+# What this does is it looks through the record_id and selects the rows that have the same record_id show up atleast 3 times
+v = df_filtered['record_id'].value_counts()[lambda x: x >= 3].index
+v = v.union([101]) #  Used documentation on how to structure this and use the union function
+df_3 = df_filtered[df_filtered['record_id'].isin(v)]
+
+# Let's choose  up to 200 others  patients ( we are doing this so we can compare patient 101 and see relative paths it could take)
+other_ids = [i for i in df_3['record_id'].unique() if i != 101] # this filters record_ids ( that show up at 3 different timepoints) excluding patient 101 ( record_id)
+sampled_ids = random.sample(other_ids, min(200, len(other_ids))) # this samples 200 random record_ids pateints 
+sampled_ids.append(101)#(this adds the record_id 101 ( our target pateint))
+
+# this is full dataframe where it includes both the 200 sampled record_ids and our target paitent 101
+df_sampled = df_3[df_3['record_id'].isin(sampled_ids)]
+
+
+
+# MAKING THE GRAPH (PLOTTING)
+plt.figure(figsize=(14, 7))
+
+
+#Plotting other patient lines (for comparison)- conditional for making all other sample record_ids grey
+for p, group in df_sampled.groupby('record_id'):
+    if p != 101:
+        plt.plot(group['time_ordered'], group['koos_pain'], color='gray', alpha=0.2, linewidth=1)
+
+#Mean trajectory of other patients ( this may be useful to see how our paitent 101 is doing comparing to others ( in that sample))
+mean_traj = df_sampled[df_sampled['record_id'] != 101].groupby('time_ordered')['koos_pain'].mean()
+plt.plot(mean_traj.index, mean_traj.values, color='blue', linestyle='--', linewidth=2, label='Mean Trajectory') # blue is a good choice
+
+# Recovery phases- for visual aiding
+plt.axvspan(0, 1, color='gold', alpha=0.1, label='Early Recovery Stage')
+plt.axvspan(1, 2, color='orange', alpha=0.1, label='Mid Recovery Stage')
+plt.axvspan(2, 3, color='green', alpha=0.1, label='Late Recovery Stage')
+
+# Let's Highlight Patient 101
+ben = df_sampled[df_sampled['record_id'] == 101].sort_values('time_ordered') #this makes a new column that has information on our benchmark patient
+plt.plot(ben['time_ordered'], ben['koos_pain'], color='red', linewidth=2.5) # red to show importance
+# Annotate each point on Patient 101's line with the KOOS Pain score value
+for x, y in zip(ben['time_ordered'], ben['koos_pain']):
+    plt.text(x, y + 1, f'{y:.1f}', color='red', fontsize=9, ha='left')
+
+
+# styling
+plt.xticks(ticks=range(len(labels)), labels=labels)
+plt.xlabel('Time Since Surgery',fontsize=12)
+plt.ylabel('KOOS Pain Score', fontsize=12)
+plt.text(-0.2, 105, 'Post-ACLR KOOS Pain Scores: Where Does',fontsize=20, fontweight='bold', ha='left')
+plt.text(1.613, 105, 'Patient 101', fontsize=20, fontweight='bold', ha='left', color='#FF0000')
+plt.text(2.12, 105, 'Fit in the Recovery Spectrum?', fontsize=20, fontweight='bold', ha='left')
+plt.grid(False)
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['bottom'].set_visible(False)
+plt.gca().spines['left'].set_visible(False)
+plt.gca().spines['left'].set_position(('outward', -30))
+plt.tick_params(axis='x', which='both', length=0, pad= 15)
+plt.figtext(0.01, -0.05, 'Note: KOOS Pain scores range from 0 (extreme pain) to 100 (no pain). Data includes randomly sampled patients with at least 3 observations.', fontsize=10, ha='left')
+plt.figtext(0.01, -0.08, "Note: Multiple observations may exist within a time bin")
+plt.figtext(0.01, -0.16,"Data Source: Evaluation of Thigh Muscle Strength in Adolescent Patients After Anterior Cruciate Ligament Reconstruction\nWith Lateral Tenodesis or Anterolateral Ligament Reconstruction ",fontsize=10, ha='left', color='#999999')
+
+plt.legend(loc='lower right', bbox_to_anchor=(0.9, 0.1), facecolor="white")
+plt.tight_layout()
+plt.show()
