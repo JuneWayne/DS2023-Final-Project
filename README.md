@@ -16,12 +16,13 @@ We developed visualizations that compare an individual patient's progress agains
 ---
 
 ### Key Takeaways  
-Throughout this project, we learned:
+- Through working on this project, we learned different visualization methods of comparison with a group to provide insights for an individual.
 
-- How to design **visualizations that emphasize group-to-individual comparison**.
-- The importance of **exploratory data analysis**, especially when working with large datasets containing overlapping or related variables (e.g., time since surgery in various formats).
-- Skills in **constructing clean, insightful visuals**, which will be valuable for future data-driven reports, dashboards, or research posters.
-- Broad applicability of **mean/average-based comparison frameworks** in real-world data science tasks.
+- While developing these visualizations, we also learned the importance of full exploration of all the variables in a dataset — especially in cases like ours, where numerous variables address similar things, such as time.
+
+- These skills will be pertinent to our careers as data scientists, as methods of comparing means and averages can be applied across all types of data.
+
+- Additionally, the foundational skills of developing and fine-tuning visualizations can be applied to many future project reports, presentations, and even research posters.
 
 ---
 
