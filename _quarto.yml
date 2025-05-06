@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "DS2023 Final Project - ACLR: Patient 101's Reovery Journey"
+  title: "DS2023 Final Project - ACLR: Patient 101's Recovery Journey"
   author: "Ethan, Vinith, Alieen"
   favicon: logo.png
   description: "Patient 101's Recovery Journey: Data Driven Insights into Healthcare"

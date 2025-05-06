@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "DS2023 Final Project - ACLR: Patient 101’s Reovery Journey",
+    "title": "DS2023 Final Project - ACLR: Patient 101’s Recovery Journey",
     "section": "",
     "text": "1 Report",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#prepared-for",
     "href": "index.html#prepared-for",
-    "title": "DS2023 Final Project - ACLR: Patient 101’s Reovery Journey",
+    "title": "DS2023 Final Project - ACLR: Patient 101’s Recovery Journey",
     "section": "1.1 Prepared for",
     "text": "1.1 Prepared for\nThis report is intended to be shown primarily to patients , to allow patients themselves to see how well or how far off they are in terms of the level of recovery, and whether further special types of treatments are needed or whether they should worry about their speed of recovery.\nThis report could also be prepared for physical therapists, sports medicine professionals, and surgical recovery specialists who support young athletes undergoing ACLR (Anterior Cruciate Ligament Reconstruction) recovery. Medical professionals could also base their decisions off this report as a reference.",
     "crumbs": [
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#problem-statement",
     "href": "index.html#problem-statement",
-    "title": "DS2023 Final Project - ACLR: Patient 101’s Reovery Journey",
+    "title": "DS2023 Final Project - ACLR: Patient 101’s Recovery Journey",
     "section": "1.2 Problem Statement",
     "text": "1.2 Problem Statement\nPhysicians need an efficient way to compare their patient’s progress with similar patients. What we started as a question was whether we could visualize patient data in a way that immediately provides a comparison of the individual patient to their peer group?\nMany athletes, especially young ones, undergo ACLR (Anterior Cruciate Ligament Reconstruction) surgery, which has a high possibility of having negative ripple effects on their athletic future and overall well-being. While there are many ways to analyze post-surgical recovery for long-term improvements, it is equally important to focus on the needs of the individual currently recovering.\nFrequently, patients do not fully understand the path their recovery will take, which can lead to confusion or discouragement. It is therefore critical that physical therapists and clinicians have tools to illustrate where patients stand relative to their recovery benchmarks in real time. This context can improve trust, motivation, and adherence to rehabilitation.\nEven before surgery, it is essential to help patients set realistic expectations. For example, the first few months post-surgery may feel worse than their pre-surgery state. However, patients should be reassured that this is typical, and that on average, perceived quality of life tends to improve steadily thereafter.",
     "crumbs": [
@@ -32,7 +32,7 @@
   {
     "objectID": "index.html#analysis",
     "href": "index.html#analysis",
-    "title": "DS2023 Final Project - ACLR: Patient 101’s Reovery Journey",
+    "title": "DS2023 Final Project - ACLR: Patient 101’s Recovery Journey",
     "section": "1.3 Analysis",
     "text": "1.3 Analysis\nPost-surgery recovery is crucial, no matter the procedure(s) that the patient undergoes. With the majority of patients being athletes, knee strength and ability holds even more importance to a return to their pre-surgery pace of life.\nACLR surgery requires intensive physical therapy. It would be pretty unusual for someone with any sort of previous surgery to not have any pain related to the procedure ever again. Yet for many young patients this is the first surgery that they are ever undergoing and they are woefully underprepared in what the recovery will look like.\n This visualization helps clarify how KOOS Pain Scores typically change over time. Patient 101’s trajectory is highlighted to contextualize how their recovery compares to the cohort’s mean. It is shown that Patient 101’s current pain trajectory is well above the average pain trajectory, suggesting that the patient is experiencing a normal/regular level of pain that is common across all patients, and that patient 101 is on a healthy trajectory in terms of pain registration.\nIn the process of recovering, the patient might start feeling as though they are not actually recovering or like they are falling behind benchmarks.\n The radar chart illustrates Patient 101’s self-reported metrics (like pain, symptoms, ADL, QoL) against cohort averages at both 5–7 and 8–12 month check-ins. It turns out that Patient 101 reported a worsening in the symptom’s effect at the second visit, which is also visibly worse than the cohort’s average in terms of symptom effects at the time of 8 to 12 months. Nevertheless, the patient does experience an increase in Quality of Life at the second visit, siginficantly outperforming their cohort averages. While trade-off between symptom effects and quality of life is quite counterintuitive, we could also see that metrics such as intense athletic movements also slightly improved at the second visit, potentially indicating how patient 101 values the ability to perform intense athletic movements more than experiencing worse symptom effects.\nPatients should be given comparisons with surgical peer groups in visualizations and explanations where they can easily see if they are staying on track in their recovery. This ‘on track’ benchmark would be determined by the average recovery statistics of peer groups in order to illustrate the full depth of recovery.\n This boxplot comparison provides a snapshot of how Patient 101 performs in objective medical tests and patient-reported outcomes, offering a tangible way to visualize if they’re on track. Observing all box plots, it is shown that at a second visit yielded a positive recovery outcome for almost all metrics. While some metrics didn’t reach the cohort’s median, it did reached within the inter-quartile range of the cohort’s recovery outcome, suggesting that patient 101 is on a healthy recovery trajectory, at least according to the two visits recorded. Moreover, Patient 101 is almost exceeding cohort median recovery metrics at all self reported outcomes, this correlates back to the radar graph, which showcased how Patient 101 excelled almost every KOOS self-reported recovery metrics against cohort averages. Hence overall suggesting that, although Patient 101 is on a modest healthy recovery trajectory, they are feeling much better than the rest of the cohort at Patient 101’s stage of recovery.",
     "crumbs": [
@@ -42,7 +42,7 @@
   {
     "objectID": "index.html#conclusion",
     "href": "index.html#conclusion",
-    "title": "DS2023 Final Project - ACLR: Patient 101’s Reovery Journey",
+    "title": "DS2023 Final Project - ACLR: Patient 101’s Recovery Journey",
     "section": "1.4 Conclusion",
     "text": "1.4 Conclusion\nIn the end, it is shown that its crucial during the post-surgery phase that the patient and their medical team have a straightforward way of tracking the patient’s progress.\nGiven the lasting nature of various quality of life and athletic ability related deteriorations, transparency on typical progression post-surgery is much needed.\nPatient 101 in this case is able to see their recovery rate in a manner that illustrates if there is anything concerning about the pace of their recovery. Our Patient here demonstrated a relatively optimistic recovery trajectory, at least in the self-reported evaluations. While recovering up to cohort wide expected recovery levels, Patient 101 seems to exhibit greater ‘mental recovery’, or feeling much better about their recovery than their actual outcome.\nA suggestion for this case would be to sustain the same level of recovery activities, meanwhile addressing issues of potential worsening symptoms or complications as Patient 101 had explicitly pointed out to be an issue for them.",
     "crumbs": [
