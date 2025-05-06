@@ -1,13 +1,40 @@
-## Final Project - DS2023
+# Final Project - DS2023  
+### *ACLR Patient Recovery Visualization*
 
-### Meet the team: Ethan Vinith, Alieen
+---
 
------------------------------------------
+### Meet the Team  
+**Ethan**, **Vinith**, **Aileen**
 
-This project focused on patient recovery post ACLR surgery, by utilizing averages of recovery times and tragetories to track the progress of a specific patient. In this project we developed several visualizations comparing our specific patient to the average recovery related information of his peer group. Through working on this project we learned different visualization methods of comparison with a group to provide insights for an individual. Additionally while we worked on developing these visualizations we learned the importance of full exploration of all the variables in your data set, especially in a data set like the one we were working with where there were numerous variables that addressed similar things, such as time. These skills will be pertinent to our careers as data scientists as methods of comparison of means and averages can be applied across all types of data. Additionally the foundational skills of developing and fine-tuning visualizations can be applied in many other project reports or presentations, even research posters, down the line in our careers. 
+---
 
-![Radar Graphs](Radar_small_multiples.png)
+### Project Overview  
+This project focuses on **patient recovery following ACLR (Anterior Cruciate Ligament Reconstruction) surgery**, utilizing peer group averages to track and interpret the recovery trajectory of a specific patient.  
 
-![BoxPlots](stacked_horizontal_boxplots.png)
+We developed visualizations that compare an individual patient's progress against benchmarks from similar patients, helping to contextualize whether the patient is "on track."
 
-![spaghetti graph](KOOS_Pain_Recovery_Trajectory_new.png)
+---
+
+### Key Takeaways  
+Throughout this project, we learned:
+
+- How to design **visualizations that emphasize group-to-individual comparison**.
+- The importance of **exploratory data analysis**, especially when working with large datasets containing overlapping or related variables (e.g., time since surgery in various formats).
+- Skills in **constructing clean, insightful visuals**, which will be valuable for future data-driven reports, dashboards, or research posters.
+- Broad applicability of **mean/average-based comparison frameworks** in real-world data science tasks.
+
+---
+
+### Visualizations
+
+#### Self-Reported Recovery Metrics  
+![Radar Graphs - KOOS and RSI](Radar_small_multiples.png)
+
+#### Clinical Test Results Comparison  
+![BoxPlots - Strength and Function](stacked_horizontal_boxplots.png)
+
+#### KOOS Pain Recovery Trajectory Over Time  
+![Spaghetti Graph - KOOS Pain](KOOS_Pain_Recovery_Trajectory_new.png)
+
+---
+
