@@ -140,35 +140,49 @@ df['visit_sex'] = df['visit_sex'].fillna('Not Reported')
 **Visualizing and observing the presence of missing values across all columns and taking a look at what columns are useful, and what columns are meaningless**
 
 ```python
-# I've also included a visual aid of how many missing values we have for each variable
-# Bar plot of missing values for each column
+# Calculate missing values
 missing_vals = df.isnull().sum()
-missing_vals = missing_vals[missing_vals > 0] # making sure to inlcude only the missing values ( no variables with complete)
-missing_vals.sort_values(inplace=True)
+missing_vals = missing_vals[missing_vals > 0].sort_values(ascending=False)
 
+# Plot
 plt.figure(figsize=(14, 10))
-missing_vals.plot(kind='barh', color='lightcoral') # making this horizontal bargraph to enhance readability
-plt.title('Missing Values Visualized', fontsize=20)# let's make sure the title is big
-plt.xlabel('# of Missing Values ', fontsize=10)
-plt.ylabel('Columns', fontsize=10)
-plt.xticks(fontsize=8)
-plt.yticks(fontsize=8)
-plt.gca().invert_yaxis() # we need this code to ensure that we have the missing values inverted
-plt.savefig('missing_values.png', dpi=300, bbox_inches='tight', facecolor='white')
+missing_vals.plot(kind='barh', color='lightcoral', edgecolor='black')
+
+# Titles and labels
+plt.title('Missing Values Visaulized by Column', fontsize=20, )
+plt.xlabel('Number of Missing Values', fontsize=12)
+plt.ylabel('Variables', fontsize=12)
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=10)
+
+# Invert Y-axis to show largest bars at the top
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.savefig('missing_values_bar.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.show()
 ```
 
-![missing values](missing_values.png)
+![missing values](missing_values_bar.png)
 
 ```python
-ure(figsize=(12, 12))
-sns.boxplot(data=df, orient="h")
-plt.title("Outlier present")
-plt.savefig('outliers.png', dpi=300, bbox_inches='tight', facecolor='white')
+plt.figure(figsize=(12, 12))
+plt.figure(figsize=(12, 8))
+sns.boxplot(data=df.drop(columns=["record_id"]), orient="h")
+plt.title("Boxplot of Numeric Columns")
+plt.tight_layout()
+plt.savefig('boxplot.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.show()
 ```
 
-![outliers](outliers.png)
+![outliers](boxplot.png)
+
+**^^ This map tells us some important information ( like we can see that within the similar testing/ strength assessment type- are highly correlated). For instance, controlled, limb symmtery and ACL strength have storng correlation depending on the type of testing (ch/sh/th). With that being said, we could consider putting these variables into distinict variable groups so we could make generlaizaiton visulizaitons with them. - Maybe like this: group_data =**
+
+**1. 'ACL Strength': data[['acl_sh', 'acl_th', 'acl_ch', 'acl_ext_mvic_90', 'acl_ext_mvic_60', 'acl_flex_mvic_60', 'acl_ext_isok_60', 'acl_flex_isok_60']],**
+
+**2. 'Control Strength': data[['con_sh', 'con_th', 'con_ch', 'con_ext_mvic_90', 'con_ext_mvic_60', 'con_flex_mvic_60', 'con_ext_isok_60', 'con_flex_isok_60']],**
+
+**3. 'Limb Symmetry': data[['sh_lsi', 'th_lsi', 'ch_lsi', 'lsi_ext_mvic_90', 'lsi_ext_mvic_60', 'lsi_flex_mvic_60', 'lsi_ext_isok_60', 'lsi_flex_isok_60']]**
 
 **Exploratory phase: to impute data more effectively, we chose to split the imputation process by categorical and numerical variables. We chose to impute the categorical variables via the frequency of a cateogory's presence in the dataset, and impute the numerical variables via the mean of the column's numerical values.**
 

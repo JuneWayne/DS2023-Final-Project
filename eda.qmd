@@ -20,26 +20,41 @@ The patient could equally conduct such evaluative reflection by themselves.
 ```python
 # distribtion of grafttype by age groups
 
-plt.figure(figsize=(12, 6))
-sns.countplot(data=df, x='graft_dashboard2', hue='age_group_dashboard_use')
-plt.title("Distribution by Age Group")
+plt.figure(figsize=(10, 6))
+filtered_df = df[
+    (df['age_group_dashboard_use'] != 'Not Reported') &
+    (df['graft_dashboard2'].notnull()) &
+    (df['graft_dashboard2'] != 'Not Reported')
+]
+sns.countplot(data=filtered_df, y='age_group_dashboard_use', hue='graft_dashboard2', palette='Set2')
+plt.title("Graft Type Distribution by Age Group (Excluding 'Not Reported')", fontsize=14)
+plt.xlabel("Count")
+plt.ylabel("Age Group")
+plt.legend(title='Graft Type', bbox_to_anchor=(1., 1))
+plt.tight_layout()
+plt.savefig('graft_type_isolated.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.show()
 ```
 
-![gaft type distribution](gaft%20type%20distribution.png)
+![gaft type distribution](graft_distribution_by_age_group.png)
 
 **Visualizing the distribution of age groups by sex category: this graph tells us that that the age group of 15-17 years old showcases a little disparity while all other age groups contain a similar number of male and female patients. An initial conclusion could be made that girls are likely to be injured from the age of 15 to 17 years old.**
 
 ```python
 # distrubtion of grafttype by sex
 plt.figure(figsize=(12, 6))
-sns.countplot(data=df, x='age_group_dashboard_use', hue='visit_sex')
-plt.title("Distribution of Age by Sex")
-plt.savefig('gafttype_sex.png', dpi=300, bbox_inches='tight', facecolor='white')
+sns.countplot(data=df, x='age_group_dashboard_use', hue='visit_sex', palette='Set2')
+plt.title("Distribution of Age by Sex", fontsize= 20)
+ax= plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_visible(False)
+plt.savefig('age_sex.png', dpi=300, bbox_inches='tight', facecolor='white')
 plt.show()
 ```
 
-![graft type distribution by sex](gafttype_sex.png)
+![graft type distribution by sex](age_sex.png.png)
 
 **Along the way, we discovered that tss stands for 'time since surgery' a relatively useful variable for us since we are aiming to visualize the change in recovery rates or other variables over time.**
 
