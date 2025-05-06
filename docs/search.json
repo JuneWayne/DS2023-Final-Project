@@ -2,11 +2,11 @@
   {
     "objectID": "datadictionary.html",
     "href": "datadictionary.html",
-    "title": "5  Untitled",
+    "title": "5  Data Dictionary",
     "section": "",
-    "text": "Data Dictionary",
+    "text": "Variable\nDescription\n\n\n\n\nrecord_id\nRandom record id assigned to a patient (unique to each patient)\n\n\nsex_dashboard\nSex of the patient (Male, Female, Not reported)\n\n\nkoos_pain\nPatient reported pain level via survey questions (scale = 0–100)\n\n\nkoos_sx\nPatient reported symptoms via survey questions (scale = 0–100)\n\n\nkoos_adl\nDifficulties with activities of daily living (scale = 0–100)\n\n\nkoos_sport\nDifficulties related to sport and recreation (scale = 0–100)\n\n\nkoos_qol\nKnee-related quality of life (scale = 0–100)\n\n\ntss_dashboard\nGrouped months since surgery (e.g., perioperative, 3–4 months…)\n\n\nacl_flex_isok_60\nTorque of isokinetic flexion at 60°/s: peak torque recorded (Nm/kg)\n\n\nacl_ext_isok_60\nTorque of isokinetic extension at 60°/s: peak torque recorded (Nm/kg)\n\n\nacl_ext_mvic_60\nKnee Extension MVIC at 60°: peak torque recorded (Nm/kg)\n\n\nlsi_ext_mvic_60\nLimb symmetry index of knee extension torque (Nm/kg)\n\n\nlsi_flex_isok_60\nLimb symmetry index of isokinetic flexion torque (Nm/kg)\n\n\nlsi_ext_iok_60\nLimb symmetry index of isokinetic extension torque (Nm/kg)\n\n\npedi_ikdc\nKnee function score for patients aged 10–18 (scale = 0–100)\n\n\nikdc\nAdult knee function score using IKDC form (scale = 0–100)\n\n\nacl_rsi\nReturn to Sport after Injury Scale score (scale = 0–100)\n\n\nch_lsi\nCrossover Hop limb symmetry index (percentage)\n\n\nth_lsi\nTriple Hop limb symmetry index (percentage)\n\n\nsh_lsi\nSingle Hop limb symmetry index (percentage)",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Untitled</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Data Dictionary</span>"
     ]
   }
 ]
