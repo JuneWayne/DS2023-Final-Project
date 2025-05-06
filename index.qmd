@@ -38,10 +38,10 @@ Patients should be given comparisons with surgical peer groups in visualizations
 **This boxplot comparison provides a snapshot of how Patient 101 performs in objective medical tests and patient-reported outcomes, offering a tangible way to visualize if they’re on track. Observing all box plots, it is shown that at a second visit yielded a positive recovery outcome for almost all metrics. While some metrics didn't reach the cohort's median, it did reached within the inter-quartile range of the cohort's recovery outcome, suggesting that patient 101 is on a healthy recovery trajectory, at least according to the two visits recorded. Moreover, Patient 101 is almost exceeding cohort median recovery metrics at all self reported outcomes, this correlates back to the radar graph, which showcased how Patient 101 excelled almost every KOOS self-reported recovery metrics against cohort averages. Hence overall suggesting that, although Patient 101 is on a modest healthy recovery trajectory, they are feeling much better than the rest of the cohort at Patient 101's stage of recovery.**
 
 ## **Conclusion**
-In the end, it is crucial post-surgery that the patient and their medical team have a straightforward way of tracking the patient’s progress.
+In the end, it is shown that its crucial during the post-surgery phase that the patient and their medical team have a straightforward way of tracking the patient’s progress.
 
 Given the lasting nature of various quality of life and athletic ability related deteriorations, transparency on typical progression post-surgery is much needed.
 
-The patient must have ways of seeing their recovery rate in a manner that illustrates if there is anything concerning about the pace of their recovery.
+Patient 101 in this case is able to see their recovery rate in a manner that illustrates if there is anything concerning about the pace of their recovery. Our Patient here demonstrated a relatively optimistic recovery trajectory, at least in the self-reported evaluations. While recovering up to cohort wide expected recovery levels, Patient 101 seems to exhibit greater 'mental recovery', or feeling much better about their recovery than their actual outcome.
 
-While explanations by physical therapists and surgeons are much needed, it is also crucial that the patient is able to see and comprehend their recovery themselves in order to ensure that the patient does not feel like they are flying blind in recovery.
+A suggestion for this case would be to sustain the same level of recovery activities, meanwhile addressing issues of potential worsening symptoms or complications as Patient 101 had explicitly pointed out to be an issue for them.
