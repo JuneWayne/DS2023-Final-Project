@@ -8,4 +8,4 @@
 
 ![BoxPlots](stacked_horizontal_boxplots.png)
 
-![spaghetti graph](KOOS_Pain_Recovery_Trajectory/(1).png)
+![spaghetti graph](KOOS_Pain_Recovery_Trajectory_new.png)
