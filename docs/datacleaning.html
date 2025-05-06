@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -150,8 +185,18 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-cleaning---removing-unnecessary-columns-renaming-variables-identifying-missing-values-imputing-missing-values" id="toc-data-cleaning---removing-unnecessary-columns-renaming-variables-identifying-missing-values-imputing-missing-values" class="nav-link active" data-scroll-target="#data-cleaning---removing-unnecessary-columns-renaming-variables-identifying-missing-values-imputing-missing-values"><span class="header-section-number">2.1</span> Data Cleaning - Removing unnecessary columns, renaming variables, identifying missing values, imputing missing values</a>
+  <ul class="collapse">
+  <li><a href="#removing-unnecessary-columns-columns-with-zero-data" id="toc-removing-unnecessary-columns-columns-with-zero-data" class="nav-link" data-scroll-target="#removing-unnecessary-columns-columns-with-zero-data"><span class="header-section-number">2.1.1</span> Removing unnecessary columns (columns with zero data)</a></li>
+  <li><a href="#seeing-values-to-make-the-nan-as-not-reported" id="toc-seeing-values-to-make-the-nan-as-not-reported" class="nav-link" data-scroll-target="#seeing-values-to-make-the-nan-as-not-reported"><span class="header-section-number">2.1.2</span> Seeing values to make the nan as Not reported</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,8 +220,413 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="data-cleaning---removing-unnecessary-columns-renaming-variables-identifying-missing-values-imputing-missing-values" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-cleaning---removing-unnecessary-columns-renaming-variables-identifying-missing-values-imputing-missing-values"><span class="header-section-number">2.1</span> Data Cleaning - Removing unnecessary columns, renaming variables, identifying missing values, imputing missing values</h2>
+<section id="removing-unnecessary-columns-columns-with-zero-data" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="removing-unnecessary-columns-columns-with-zero-data"><span class="header-section-number">2.1.1</span> Removing unnecessary columns (columns with zero data)</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df.columns[df.isnull().<span class="bu">all</span>()]<span class="co"># these are columns that have no data ( we need to drop)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df.drop(columns<span class="op">=</span>[<span class="st">'redcap_repeat_instrument'</span>, <span class="st">'tss_tegner'</span>], inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>total_rows <span class="op">=</span> <span class="bu">len</span>(df)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>missing_summary <span class="op">=</span> pd.DataFrame({<span class="st">"Column Name"</span>: df.columns,<span class="st">"Non-Null Count"</span>: df.notnull().<span class="bu">sum</span>().values,<span class="st">"% Missing"</span>: df.isnull().mean().values <span class="op">*</span> <span class="dv">100</span>})</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>missing_summary <span class="op">=</span> missing_summary.sort_values(by<span class="op">=</span><span class="st">"% Missing"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>missing_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Non-Null Count</th>
+<th>% Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>11150</td>
+<td>0.00%</td>
+</tr>
+<tr class="even">
+<td>redcap_event_name</td>
+<td>11150</td>
+<td>0.00%</td>
+</tr>
+<tr class="odd">
+<td>sex_dashboard</td>
+<td>4737</td>
+<td>57.52%</td>
+</tr>
+<tr class="even">
+<td>graft_dashboard2</td>
+<td>4737</td>
+<td>57.52%</td>
+</tr>
+<tr class="odd">
+<td>med_meniscus</td>
+<td>4121</td>
+<td>63.04%</td>
+</tr>
+<tr class="even">
+<td>lat_meniscus</td>
+<td>4121</td>
+<td>63.04%</td>
+</tr>
+<tr class="odd">
+<td>lat_stab</td>
+<td>3662</td>
+<td>67.16%</td>
+</tr>
+<tr class="even">
+<td>physis</td>
+<td>936</td>
+<td>91.61%</td>
+</tr>
+<tr class="odd">
+<td>visit_sex</td>
+<td>5234</td>
+<td>53.06%</td>
+</tr>
+<tr class="even">
+<td>visit_graft</td>
+<td>5234</td>
+<td>53.06%</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td>5126</td>
+<td>54.02%</td>
+</tr>
+<tr class="even">
+<td>age_group</td>
+<td>5126</td>
+<td>54.02%</td>
+</tr>
+<tr class="odd">
+<td>age_group_dashboard</td>
+<td>4724</td>
+<td>57.62%</td>
+</tr>
+<tr class="even">
+<td>age_group_dashboard_use</td>
+<td>5237</td>
+<td>53.02%</td>
+</tr>
+<tr class="odd">
+<td>height_m</td>
+<td>2518</td>
+<td>77.41%</td>
+</tr>
+<tr class="even">
+<td>mass_kg</td>
+<td>3251</td>
+<td>70.84%</td>
+</tr>
+<tr class="odd">
+<td>bmi</td>
+<td>2517</td>
+<td>77.42%</td>
+</tr>
+<tr class="even">
+<td>tss</td>
+<td>5125</td>
+<td>54.04%</td>
+</tr>
+<tr class="odd">
+<td>tss_dashboard</td>
+<td>5237</td>
+<td>53.02%</td>
+</tr>
+<tr class="even">
+<td>reinjury</td>
+<td>5175</td>
+<td>53.58%</td>
+</tr>
+<tr class="odd">
+<td>ikdc</td>
+<td>2951</td>
+<td>73.53%</td>
+</tr>
+<tr class="even">
+<td>pedi_ikdc</td>
+<td>1647</td>
+<td>85.23%</td>
+</tr>
+<tr class="odd">
+<td>marx</td>
+<td>911</td>
+<td>91.83%</td>
+</tr>
+<tr class="even">
+<td>pedi_fabs</td>
+<td>37</td>
+<td>99.67%</td>
+</tr>
+<tr class="odd">
+<td>koos_version</td>
+<td>2637</td>
+<td>76.35%</td>
+</tr>
+<tr class="even">
+<td>koos_pain</td>
+<td>2767</td>
+<td>75.17%</td>
+</tr>
+<tr class="odd">
+<td>koos_sx</td>
+<td>2769</td>
+<td>75.15%</td>
+</tr>
+<tr class="even">
+<td>koos_adl</td>
+<td>2769</td>
+<td>75.15%</td>
+</tr>
+<tr class="odd">
+<td>koos_sport</td>
+<td>2768</td>
+<td>75.16%</td>
+</tr>
+<tr class="even">
+<td>koos_qol</td>
+<td>2775</td>
+<td>75.10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Looking for missing values in the rest of the columns</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>() <span class="co"># looking for missing data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Missing Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>redcap_event_name</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>sex_dashboard</td>
+<td>6413</td>
+</tr>
+<tr class="even">
+<td>graft_dashboard2</td>
+<td>6413</td>
+</tr>
+<tr class="odd">
+<td>med_meniscus</td>
+<td>7029</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>con_flex_isok_60</td>
+<td>9402</td>
+</tr>
+<tr class="even">
+<td>lsi_flex_isok_60</td>
+<td>8928</td>
+</tr>
+<tr class="odd">
+<td>strength_testing_complete</td>
+<td>5913</td>
+</tr>
+<tr class="even">
+<td>rts</td>
+<td>10464</td>
+</tr>
+<tr class="odd">
+<td>rts_tss</td>
+<td>10479</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Finding the top few columns that have the least percentage of missing values, this shows that there exists a huge volume of missing values in the dataset and that imputation is very necessary in order to make any meaningful insight out of this dataset</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>missing_percent <span class="op">=</span> df.isnull().<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(df) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(missing_percent.nsmallest(<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>% Missing Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<td>redcap_event_name</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td>age_group_dashboard_use</td>
+<td>53.031390</td>
+</tr>
+<tr class="even">
+<td>tss_dashboard</td>
+<td>53.031390</td>
+</tr>
+<tr class="odd">
+<td>strength_testing_complete</td>
+<td>53.031390</td>
+</tr>
+<tr class="even">
+<td>visit_sex</td>
+<td>53.058296</td>
+</tr>
+<tr class="odd">
+<td>visit_graft</td>
+<td>53.058296</td>
+</tr>
+<tr class="even">
+<td>reinjury</td>
+<td>53.587444</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td>54.026906</td>
+</tr>
+<tr class="even">
+<td>age_group</td>
+<td>54.026906</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="seeing-values-to-make-the-nan-as-not-reported" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="seeing-values-to-make-the-nan-as-not-reported"><span class="header-section-number">2.1.2</span> Seeing values to make the nan as Not reported</h3>
+<p><strong>Before carrying out imputation for the missing values, replace all ‘NaN’ entries in the various demographic variables as Not reported for consistency</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"sex_dashboard"</span>].unique())</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'visit_sex'</span>].unique())</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'age_group_dashboard_use'</span>].unique())</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'graft_dashboard2'</span>].unique())</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'visit_graft'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>[‘Male’ nan ‘Female’ ‘Not Reported’] [nan ‘Male’ ‘Female’ ‘Not Reported’] [nan ‘21 to 25 years’ ‘12 to 14 years’ ‘15 to 17 years’ ‘18 to 20 years’ ‘26 to 34 years’ ‘Not Reported’] [‘Other’ nan ‘HS autograft’ ‘BTB autograft’ ‘Allograft’ ‘QT autograft’] [nan ‘Other’ ‘HS autograft’ ‘BTB autograft’ ‘Allograft’ ‘QT autograft’]</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'redcap_event_name'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>[‘baseline_arm_1’ ‘visit_1_arm_1’ ‘long_term_outcomes_arm_1’ ‘visit_2_arm_1’ ‘visit_3_arm_1’ ‘visit_4_arm_1’ ‘visit_5_arm_1’ ‘visit_6_arm_1’ ‘data_upload_arm_2’ ‘visit_7_arm_1’ ‘visit_8_arm_1’ ‘visit_9_arm_1’]</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'strength_testing_complete'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>[nan 2. 0.]</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'med_meniscus'</span>].unique())</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'lat_meniscus'</span>].unique())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>[nan 1. 3. 2.] [nan 3. 1. 2.]</p>
+<p><strong>Gender, Age Groups, ( make the nan as Not reported) ( input)</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'age_group_dashboard_use'</span>] <span class="op">=</span> df[<span class="st">'age_group_dashboard_use'</span>].fillna(<span class="st">'Not Reported'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sex_dashboard'</span>] <span class="op">=</span> df[<span class="st">'sex_dashboard'</span>].fillna(<span class="st">'Not Reported'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'visit_sex'</span>] <span class="op">=</span> df[<span class="st">'visit_sex'</span>].fillna(<span class="st">'Not Reported'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Visualizing and observing the presence of missing values across all columns and taking a look at what columns are useful, and what columns are meaningless</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I've also included a visual aid of how many missing values we have for each variable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot of missing values for each column</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>missing_vals <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>missing_vals <span class="op">=</span> missing_vals[missing_vals <span class="op">&gt;</span> <span class="dv">0</span>] <span class="co"># making sure to inlcude only the missing values ( no variables with complete)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>missing_vals.sort_values(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>missing_vals.plot(kind<span class="op">=</span><span class="st">'barh'</span>, color<span class="op">=</span><span class="st">'lightcoral'</span>) <span class="co"># making this horizontal bargraph to enhance readability</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Missing Values Visualized'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="co"># let's make sure the title is big</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'# of Missing Values '</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Columns'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>plt.gca().invert_yaxis() <span class="co"># we need this code to ensure that we have the missing values inverted</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'missing_values.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="missing_values.png" class="img-fluid figure-img"></p>
+<figcaption>missing values</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>df, orient<span class="op">=</span><span class="st">"h"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Outlier present"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'outliers.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="outliers.png" class="img-fluid figure-img"></p>
+<figcaption>outliers</figcaption>
+</figure>
+</div>
+<p><strong>Exploratory phase: to impute data more effectively, we chose to split the imputation process by categorical and numerical variables. We chose to impute the categorical variables via the frequency of a cateogory’s presence in the dataset, and impute the numerical variables via the mean of the column’s numerical values.</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's split the categorical and numerical columns</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns <span class="co"># this includes strings</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>numerical_columns <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'float64'</span>, <span class="st">'int64'</span>]).columns <span class="co"># these are numbers with meaning</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's impute categorical(mode) and numerical columns (median)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>df[categorical_columns] <span class="op">=</span> df[categorical_columns].fillna(df[categorical_columns].mode().iloc[<span class="dv">0</span>])</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>df[numerical_columns] <span class="op">=</span> df[numerical_columns].fillna(df[numerical_columns].median())</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>df.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Missing Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>redcap_event_name</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>sex_dashboard</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>graft_dashboard2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>med_meniscus</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>con_flex_isok_60</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>lsi_flex_isok_60</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>strength_testing_complete</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>rts</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>rts_tss</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

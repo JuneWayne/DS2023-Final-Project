@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -150,8 +185,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#plan-outlook" id="toc-plan-outlook" class="nav-link active" data-scroll-target="#plan-outlook"><span class="header-section-number">3.1</span> Plan outlook:</a></li>
+  <li><a href="#example-scenario" id="toc-example-scenario" class="nav-link" data-scroll-target="#example-scenario"><span class="header-section-number">3.2</span> Example Scenario:</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis"><span class="header-section-number">3.3</span> Exploratory Data Analysis</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,8 +218,94 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="plan-outlook" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="plan-outlook"><span class="header-section-number">3.1</span> Plan outlook:</h2>
+<p>Our previous plan is to create a dynamic dashboard, but given that dynamic dashboards are not allowed in this assignment, we chose to create graphs that identifies a hypothetical patient (randomly selected patient from the dataset) in our hypothetical clinic, and is currently being treated by a hypothetical doctor in the midst of a recovery stage. The purpose of the visualizations would then to be to compare the current patient’s recovery status to the rest of the cohort’s averages or median values (at the current stage of recovery, 5 - 7 months, 8 - 12 months), by doing so, doctors could be informed as to how well the patient is recovering, and patients themselves could also get a grasp at whether they are on track when compared to a cohort wide regular recovery trajectory.</p>
+</section>
+<section id="example-scenario" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="example-scenario"><span class="header-section-number">3.2</span> Example Scenario:</h2>
+<p>If a doctor conducted a self-reported evaluation survey with their patient (i.e.&nbsp;KOOS), or any other form of strength evaluation based off a certain testing methodology. The doctor could then compare that particular patient’s survey results or evaluation score with the average/median values of the rest of the cohort’s performances (or regular recovery trends of all patients recorded in the database) to determine whether the patient is on track, falling behind, or suffering from unique conditions that does not fit normal observed recovery outcomes.</p>
+<p>The patient could equally conduct such evaluative reflection by themselves.</p>
+</section>
+<section id="exploratory-data-analysis" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="exploratory-data-analysis"><span class="header-section-number">3.3</span> Exploratory Data Analysis</h2>
+<p><strong>Visualizing the distribution of graft types by age groups: are graft types a significant factor / choice among a certain age group?</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distribtion of grafttype by age groups</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'graft_dashboard2'</span>, hue<span class="op">=</span><span class="st">'age_group_dashboard_use'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution by Age Group"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="gaft type distribution.png" class="img-fluid figure-img"></p>
+<figcaption>gaft type distribution</figcaption>
+</figure>
+</div>
+<p><strong>Visualizing the distribution of age groups by sex category: this graph tells us that that the age group of 15-17 years old showcases a little disparity while all other age groups contain a similar number of male and female patients. An initial conclusion could be made that girls are likely to be injured from the age of 15 to 17 years old.</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distrubtion of grafttype by sex</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'age_group_dashboard_use'</span>, hue<span class="op">=</span><span class="st">'visit_sex'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Age by Sex"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'gafttype_sex.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="gafttype_sex.png" class="img-fluid figure-img"></p>
+<figcaption>graft type distribution by sex</figcaption>
+</figure>
+</div>
+<p><strong>Along the way, we discovered that tss stands for ‘time since surgery’ a relatively useful variable for us since we are aiming to visualize the change in recovery rates or other variables over time.</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">'tss_dashboard'</span>].unique()) <span class="co"># time since surgery</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>[‘5 to 7 months’ ‘13 to 24 months’ ‘8 to 12 months’ ‘3 to 4 months’ ‘Not Reported’ ‘Preoperative’]</p>
+<p><strong>Visualizing how the self-reported pain evaluation score is distributed by the variable of time since surgery. If the KOOS pain score is distributed from 0 to 100, with 100 representing maximum ‘pain level’, we could conclude that most people felt maximum painfulness at the 8th to 12th month since surgery. This proves that that tss, combined with any other recovery metrics, could deduce valuable and interesting insights for not just us, but also our ‘stakeholders’ - the doctors/physicians when observing the recovery of their patients.</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'koos_pain'</span>, hue<span class="op">=</span><span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>)  <span class="co"># or 'dodge'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of KOOS Pain Scores by Time Since Surgery"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"KOOS Pain Score"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>plt.legend(df[<span class="st">'tss_dashboard'</span>])</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'koos_pain_score_bytss.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="koos_pain_score_bytss.png" class="img-fluid figure-img"></p>
+<figcaption>Distribution of Pain scores by tss</figcaption>
+</figure>
+</div>
+<p><strong>With this in mind, we’ve decided to visualize tss against all of the other recovery metric variables (whether it is pain, LSI, strength score, etc) to see how patients recover over time. We adopted a small multiples strategy so that all of the visualizations can be created at once</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizing the distirbution of strength testing, tss ( multiple)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fig,axs <span class="op">=</span> plt.subplots(<span class="dv">3</span>,<span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">15</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_sh'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">0</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>,<span class="dv">0</span>].set_title(<span class="st">"ACL Strength"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_th'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">1</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_ch'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>,<span class="dv">2</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_ext_mvic_90'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">0</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_ext_mvic_60'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">1</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_flex_mvic_60'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>,<span class="dv">2</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_ext_isok_60'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">0</span>], legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'acl_flex_isok_60'</span>, hue<span class="op">=</span> <span class="st">'tss_dashboard'</span>, multiple<span class="op">=</span><span class="st">'stack'</span>, ax<span class="op">=</span>axs[<span class="dv">2</span>,<span class="dv">1</span>])</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'recovery_metrics_by_tss.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="recovery_metrics_by_tss.png" class="img-fluid figure-img"></p>
+<figcaption>small multiples of acl strength distributions</figcaption>
+</figure>
+</div>
+<p><strong>From the small multiples above, we could see how the recovery metrics are distributed by comparing the different ‘types’ of recovery metrics in the same ‘category’. I.e. observing how acl knee extension value differentiates in the different degrees of which the patient can extend their knee to.</strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

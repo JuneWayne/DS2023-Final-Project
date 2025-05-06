@@ -6,14 +6,18 @@ format: html
 # **Report**
 
 ## **Prepared for**
-This report is prepared for physical therapists, sports medicine professionals, and surgical recovery specialists who support young athletes undergoing ACLR (Anterior Cruciate Ligament Reconstruction) recovery.
+This report is intended to be shown primarily to patients , to allow patients themselves to see how well or how far off they are in terms of the level of recovery, and whether further special types of treatments are needed or whether they should worry about their speed of recovery. 
+
+This report could also be prepared for physical therapists, sports medicine professionals, and surgical recovery specialists who support young athletes undergoing ACLR (Anterior Cruciate Ligament Reconstruction) recovery. Medical professionals could also base their decisions off this report as a reference.
 
 ## **Problem Statement**
-Many athletes, especially young ones, undergo ACLR surgery, which has a high possibility of having negative ripple effects on their athletic future and overall well-being. While there are many ways to analyze post-surgical recovery for improvements for future patients, it is important to consider the patient that is currently recovering.
+Physicians need an efficient way to compare their patient’s progress with similar patients. What we started as a question was whether we could visualize patient data in a way that immediately provides a comparison of the individual patient to their peer group?
 
-Frequently patients might not necessarily understand the path that their recovery will take, therefore it is critical that physical therapists utilize methods to illustrate to patients where they stand in track for recovery.
+Many athletes, especially young ones, undergo ACLR (Anterior Cruciate Ligament Reconstruction) surgery, which has a high possibility of having negative ripple effects on their athletic future and overall well-being. While there are many ways to analyze post-surgical recovery for long-term improvements, it is equally important to focus on the needs of the individual currently recovering.
 
-Even pre-surgery it is important that patients understand it is normal for the first three months to feel worse than before surgery, but that generally their perception of quality of life will increase.
+Frequently, patients do not fully understand the path their recovery will take, which can lead to confusion or discouragement. It is therefore critical that physical therapists and clinicians have tools to illustrate where patients stand relative to their recovery benchmarks in real time. This context can improve trust, motivation, and adherence to rehabilitation.
+
+Even before surgery, it is essential to help patients set realistic expectations. For example, the first few months post-surgery may feel worse than their pre-surgery state. However, patients should be reassured that this is typical, and that on average, perceived quality of life tends to improve steadily thereafter.
 
 ## **Analysis**
 Post-surgery recovery is crucial, no matter the procedure(s) that the patient undergoes. With the majority of patients being athletes, knee strength and ability holds even more importance to a return to their pre-surgery pace of life.
